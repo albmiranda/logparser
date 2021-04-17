@@ -6,16 +6,17 @@
 
 class KillData {
     public:
-        KillData();
+        KillData(std::string &);
         ~KillData();
-        int Parser(std::string&);
+
+        std::string GetPlayer();
     
     private:
         std::string player;
         std::string death_cause;
 
-        void FindPlayer(std::string&);
-        void FindDeathCause(std::string&);
+        std::string FindPlayer(std::string&);
+        std::string FindDeathCause(std::string&);
 };
 
 

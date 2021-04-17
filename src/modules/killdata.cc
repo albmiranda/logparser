@@ -1,30 +1,23 @@
 #include "killdata.h"
 
-#include <iostream>
 
-KillData::KillData() {}
+KillData::KillData(std::string & line) {
+    player = FindPlayer(line);
+    death_cause = FindDeathCause(line);
+}
 
 KillData::~KillData() {}
 
-int KillData::Parser(std::string & line) {
-    if (line.find("Kill:") == std::string::npos) {
-        return -1;
-    }
-
-    FindPlayer(line);
-    FindDeathCause(line);    
-
-    return 0;
+std::string KillData::GetPlayer() {
+    return player;
 }
 
-void KillData::FindPlayer(std::string & line) {
+std::string KillData::FindPlayer(std::string & line) {
     std::string str = line.substr(line.find_last_of(":")+1);
-
-    player = str.substr(1, str.find("killed")-2);
+    return str.substr(1, str.find("killed") - 2);
 }
 
-void KillData::FindDeathCause(std::string & line) {
+std::string KillData::FindDeathCause(std::string & line) {
     std::size_t pos = line.find_last_of("by ");
-
-    death_cause = line.substr(pos+1);
+    return line.substr(pos+1);
 }
