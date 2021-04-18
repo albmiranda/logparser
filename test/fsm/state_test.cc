@@ -40,6 +40,8 @@ TEST_F(NoGameStateTest, TransitionToStartEvent) {
 
     ASSERT_TRUE(GameState::match != NULL);
     ASSERT_TRUE(p->GetState() == &RunningGameState::getInstance());
+
+    delete GameState::match;
 }
 
 
@@ -67,6 +69,8 @@ TEST_F(RunningGameStateTest, TransitionToNotHandledEvent) {
 
     ASSERT_EQ(GameState::match->total_kills, 0);
     ASSERT_TRUE(p->GetState() == &RunningGameState::getInstance());
+
+    delete GameState::match;
 }
 
 TEST_F(RunningGameStateTest, TransitionToKillEvent) {
@@ -75,6 +79,8 @@ TEST_F(RunningGameStateTest, TransitionToKillEvent) {
 
     ASSERT_EQ(GameState::match->total_kills, 1);
     ASSERT_TRUE(p->GetState() == &RunningGameState::getInstance());
+
+    delete GameState::match;
 }
 
 TEST_F(RunningGameStateTest, TransitionToFinishEvent) {
