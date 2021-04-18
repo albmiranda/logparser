@@ -17,4 +17,7 @@ endif()
 
 file(MAKE_DIRECTORY out)
 
+enable_testing()
+
 add_subdirectory(src)
+add_subdirectory(test)

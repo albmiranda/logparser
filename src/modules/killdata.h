@@ -10,6 +10,7 @@ class KillData {
         ~KillData();
 
         std::string GetPlayer();
+        std::string GetDeathCause();
     
     private:
         std::string player;

@@ -10,6 +10,10 @@ void Parser::SetState(GameState & s) {
     state = &s;
 }
 
+const GameState * Parser::GetState() {
+    return state;
+}
+
 void Parser::Handle(const std::string & line) {
     state->TransitionTo(this, CheckEvent(line), line);
 }

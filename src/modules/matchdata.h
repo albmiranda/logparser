@@ -8,7 +8,7 @@
 
 class MatchData {
     public:
-        MatchData(int);
+        MatchData(int index = 0);
         ~MatchData();
         void Update(KillData &);
         int Dump(const char *);

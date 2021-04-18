@@ -35,6 +35,7 @@ void RunningGameState::TransitionTo(Parser *p, int event, const std::string & li
     } else if (event == GameEvent::FINISH) {
         match->Dump("../out/match.rec");
         delete GameState::match;
+        GameState::match = NULL;
         p->SetState(NoGameState::getInstance());
     }
 }

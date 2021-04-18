@@ -3,12 +3,14 @@
 #include <fstream>
 #include <algorithm>
 
-MatchData::MatchData(int index = 0) {
+MatchData::MatchData(int index) {
     id = index;
     total_kills = 0;
 }
 
 MatchData::~MatchData() {
+    id = 0;
+    total_kills = 0;
     players.clear();
     kills.clear();
 }

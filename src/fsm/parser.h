@@ -15,6 +15,7 @@ class Parser {
         ~Parser();
         void Handle(const std::string &);
         void SetState(GameState &);
+        const GameState * GetState(void);
 
     private:
         GameState * state;
