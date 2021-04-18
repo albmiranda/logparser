@@ -7,13 +7,13 @@
 
 
 
-KillDataTest::KillDataTest() {};
+KillDataTest::KillDataTest() {}
 
-KillDataTest::~KillDataTest() {};
+KillDataTest::~KillDataTest() {}
 
-void KillDataTest::SetUp() {};
+void KillDataTest::SetUp() {}
 
-void KillDataTest::TearDown() {};
+void KillDataTest::TearDown() {}
 
 TEST_F(KillDataTest, FindPlayerEmptyLine) {
     std::string line("");

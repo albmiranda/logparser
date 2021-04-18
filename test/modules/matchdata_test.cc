@@ -6,17 +6,17 @@
 
 
 
-MatchDataTest::MatchDataTest() {};
+MatchDataTest::MatchDataTest() {}
 
-MatchDataTest::~MatchDataTest() {};
+MatchDataTest::~MatchDataTest() {}
 
 void MatchDataTest::SetUp() {
     match = new MatchData();
-};
+}
 
 void MatchDataTest::TearDown() {
     delete match;
-};
+}
 
 TEST_F(MatchDataTest, DefaultInitial) {
     EXPECT_EQ(match->id, 0);

@@ -13,15 +13,15 @@
 
 NoGameStateTest::NoGameStateTest() {
     p = new Parser();
-};
+}
 
 NoGameStateTest::~NoGameStateTest() {
     delete p;
-};
+}
 
-void NoGameStateTest::SetUp() {};
+void NoGameStateTest::SetUp() {}
 
-void NoGameStateTest::TearDown() {};
+void NoGameStateTest::TearDown() {}
 
 TEST_F(NoGameStateTest, TransitionToNotHandledEvent) {
     ASSERT_TRUE(GameState::match == NULL);
@@ -50,17 +50,17 @@ TEST_F(NoGameStateTest, TransitionToStartEvent) {
 
 RunningGameStateTest::RunningGameStateTest() {
     p = new Parser();
-};
+}
 
 RunningGameStateTest::~RunningGameStateTest() {
     delete p;
-};
+}
 
 void RunningGameStateTest::SetUp() {
     NoGameState::getInstance().TransitionTo(p, GameEvent::START, std::string(""));
-};
+}
 
-void RunningGameStateTest::TearDown() {};
+void RunningGameStateTest::TearDown() {}
 
 TEST_F(RunningGameStateTest, TransitionToNotHandledEvent) {
 

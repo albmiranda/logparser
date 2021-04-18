@@ -6,7 +6,7 @@
 
 // instantiate the static variable
 MatchData * GameState::match = NULL;
-int index = 0;
+int match_index = 0;
 
 GameState & NoGameState::getInstance() {
     static NoGameState singleton;
@@ -14,13 +14,14 @@ GameState & NoGameState::getInstance() {
 }
 
 void NoGameState::TransitionTo(Parser * p, int event, const std::string & line) {
+    (void)line;
     if (event == GameEvent::START) {
-        match = new MatchData(++index);
+        match = new MatchData(++match_index);
         p->SetState(RunningGameState::getInstance());
     }
 }
 
-NoGameState::NoGameState() {};
+NoGameState::NoGameState() {}
 
 GameState & RunningGameState::getInstance() {
     static RunningGameState singleton;
@@ -40,4 +41,4 @@ void RunningGameState::TransitionTo(Parser *p, int event, const std::string & li
     }
 }
 
-RunningGameState::RunningGameState() {};
+RunningGameState::RunningGameState() {}

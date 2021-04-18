@@ -1,16 +1,16 @@
 #include "parser_test.h"
 
-ParserTest::ParserTest() {};
+ParserTest::ParserTest() {}
 
-ParserTest::~ParserTest() {};
+ParserTest::~ParserTest() {}
 
 void ParserTest::SetUp() {
     p = new Parser();
-};
+}
 
 void ParserTest::TearDown() {
     delete p;
-};
+}
 
 TEST_F(ParserTest, DefaultInit) {
     ASSERT_EQ(p->GetState(), &NoGameState::getInstance());

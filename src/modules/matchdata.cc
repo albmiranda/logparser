@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <algorithm>
+#include <cstring>
 
 MatchData::MatchData(int index) {
     id = index;
@@ -35,7 +36,7 @@ void MatchData::Update(KillData & killdata) {
 
 int MatchData::Dump(const char * filename) {
 
-    if (filename == NULL || filename == "") {
+    if (filename == NULL || strcmp(filename, "") == 0) {
         return -1;
     }
 
