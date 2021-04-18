@@ -31,16 +31,37 @@ void MatchData::Update(KillData & killdata) {
     }
 }
 
-void MatchData::Dump() {
-    std::ofstream dumpfile("../match.json");
+int MatchData::Dump(const char * filename) {
+
+    if (filename == NULL || filename == "") {
+        return -1;
+    }
+
+    std::ofstream dumpfile(filename, std::ios_base::app);
 
     dumpfile << "\"game_" << id << "\": {";
 
     dumpfile << "\"total_kills\": " << total_kills << ",";
 
     dumpfile << "\"players\": [";
-    for(std::vector<std::string>::iterator it = std::begin(players); it != std::end(players); ++it) {
-        dumpfile << "\"" << *it << "\", ";
+    for (std::vector<std::string>::iterator it = std::begin(players); it != std::end(players); it++) {
+        dumpfile << "\"" << *it << "\"";
+        if (*it != players.back()) {
+            dumpfile << ", ";
+        }
     }
     dumpfile << "],";
+
+    dumpfile << "\"kills\": {";
+    for (std::map<std::string, int>::iterator it = kills.begin(); it != kills.end(); it++) {
+        dumpfile << "\"" << it->first << "\": " << it->second;
+        if (it->first != kills.rbegin()->first) {
+            dumpfile << ",";
+        }
+    }
+    dumpfile << " }";
+
+    dumpfile << "}" << std::endl;
+
+    return 0;
 }

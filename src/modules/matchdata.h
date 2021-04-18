@@ -11,7 +11,7 @@ class MatchData {
         MatchData(int);
         ~MatchData();
         void Update(KillData &);
-        void Dump();
+        int Dump(const char *);
 
     private:
         int id;

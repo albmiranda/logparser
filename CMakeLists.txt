@@ -15,4 +15,6 @@ else()
     add_compile_options(-Wall -Wextra -pedantic -Werror -O3)
 endif()
 
+file(MAKE_DIRECTORY out)
+
 add_subdirectory(src)

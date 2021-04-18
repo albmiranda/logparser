@@ -6,11 +6,15 @@ Parser::Parser() {
 
 Parser::~Parser() {}
 
-void Parser::setState(GameState & s) {
+void Parser::SetState(GameState & s) {
     state = &s;
 }
 
-int Parser::CheckEvent(std::string & line) {
+void Parser::Handle(const std::string & line) {
+    state->TransitionTo(this, CheckEvent(line), line);
+}
+
+int Parser::CheckEvent(const std::string & line) {
     if (ParserKill(line) == 0) {
         return GameEvent::KILL;
 
@@ -24,18 +28,14 @@ int Parser::CheckEvent(std::string & line) {
     return GameEvent::UNKNOWN;
 }
 
-void Parser::Handle(int event) {
-    state->TransitionTo(this, event);
-}
-
-int Parser::ParserNewMatch(std::string& line) {
+int Parser::ParserNewMatch(const std::string& line) {
     return (line.find("InitGame:") == std::string::npos) ? -1 : 0;
 }
 
-int Parser::ParserEndMatch(std::string& line) {
+int Parser::ParserEndMatch(const std::string& line) {
     return (line.find("ShutdownGame:") == std::string::npos) ? -1 : 0;
 }
 
-int Parser::ParserKill(std::string& line) {
+int Parser::ParserKill(const std::string& line) {
     return (line.find("Kill:") == std::string::npos) ? -1 : 0;
 }

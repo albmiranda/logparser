@@ -1,7 +1,9 @@
-add_executable (logreader
-                modules/killdata.cc
-                modules/matchdata.cc
-                modules/state.cc
-                modules/parser.cc
-                main.cc)
-install(TARGETS logreader DESTINATION ${PROJECT_SOURCE_DIR}/bin)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+
+file(GLOB source
+    "modules/*.cc"
+    "fsm/*.cc"
+    "main.cc")
+
+add_executable (logparser ${source})
+install(TARGETS logparser DESTINATION ${PROJECT_SOURCE_DIR}/bin)

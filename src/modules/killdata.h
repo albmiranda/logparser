@@ -6,7 +6,7 @@
 
 class KillData {
     public:
-        KillData(std::string &);
+        KillData(const std::string &);
         ~KillData();
 
         std::string GetPlayer();
@@ -15,8 +15,8 @@ class KillData {
         std::string player;
         std::string death_cause;
 
-        std::string FindPlayer(std::string&);
-        std::string FindDeathCause(std::string&);
+        std::string FindPlayer(const std::string&);
+        std::string FindDeathCause(const std::string&);
 };
 
 
