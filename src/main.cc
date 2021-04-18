@@ -1,5 +1,8 @@
 #include <iostream>
 #include <fstream>
+#include <vector>
+
+#include "fsm/parser.h"
 
 int main() {
 
@@ -9,9 +12,10 @@ int main() {
         return -1;
     }
 
+    Parser parser;
     std::string line;
     while (std::getline(logfile, line)) {
-        std::cout << line << std::endl;
+        parser.Handle(line);
     }
 
     logfile.close();
