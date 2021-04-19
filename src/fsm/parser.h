@@ -13,12 +13,15 @@ class Parser {
     public:
         Parser();
         ~Parser();
-        void Handle(const std::string &);
+        void Handle(void);
         void SetState(GameState &);
         const GameState * GetState(void);
+        void SetLine(std::string &);
+        const std::string * GetLine(void);
 
     private:
         GameState * state;
+        std::string line;
 
         int CheckEvent(const std::string&);
         int ParserNewMatch(const std::string&);

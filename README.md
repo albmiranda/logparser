@@ -5,6 +5,9 @@ This project aims solve a Test to Software Engineering positions at CloudWalk.
 It's composed by a parser which reads Quake 3 Arena log and groups game data of the matches.
 In addition, a script was developed to collect game data and show it readable on screen.
 
+The workflow was based on [gitflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow), actually it's more like a reduced-gitflow with no feature branch due reduced number of features.
+The versioning follow [semantic version](https://semver.org/)
+
 ## Dependencies
 
 #### CMake 
@@ -52,6 +55,11 @@ Once you get started application binary will be delivered to \${PROJECT_ROOT}/bi
 ```
 Run it and a file match.rec whithin \${PROJECT_ROOT}/out will be created to store the game data. Later that file is use by a script to summarize the game data.
 
+There is a script to print a report for matches and a player ranking. This script was written in Python. To see it type:
+```bash
+   python3 script/report.py
+```
+
 #### Memory Leak detection
 
 This project aims to free all heap blocks. To achieve it the valgring was used. To validate results type:
@@ -68,14 +76,16 @@ A unit test application will be available after regular [compile](#getting-start
 ```
 
 The code coverage was identified by gcov/lcov tools.
-> Overall coverage rate:
-  lines......: 90.4% (104 of 115 lines)
-  functions..: 96.0% (24 of 25 functions)
+> Summary coverage rate:
+  lines......: 90.8% (109 of 120 lines)
+  functions..: 96.3% (26 of 27 functions)
+  branches...: no data found
 
 To reach this values just type:
 ```bash
-   ./build/test/logparser_test
-   lcov --capture --directory ./build/src --output-file coverage.info
+    cd build
+   ./test/logparser_test
+   lcov --capture --directory ./src --output-file coverage.info
    lcov -r coverage.info /usr/include/\* -o coverage_clean.info
    genhtml coverage_clean.info --output-directory codecoverage
 ```
@@ -83,6 +93,7 @@ To reach this values just type:
 ## Backlog - Future features
 
 This project scope still covers some features which wasn't developed at this time. Following some of them:
+* *Plus* task
 * Pipeline CI/CD
 * End-to-end tests
 

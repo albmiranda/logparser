@@ -25,9 +25,9 @@ void NoGameStateTest::TearDown() {}
 
 TEST_F(NoGameStateTest, TransitionToNotHandledEvent) {
     ASSERT_TRUE(GameState::match == NULL);
-    NoGameState::getInstance().TransitionTo(p, GameEvent::UNKNOWN, std::string(""));
-    NoGameState::getInstance().TransitionTo(p, GameEvent::FINISH, std::string(""));
-    NoGameState::getInstance().TransitionTo(p, GameEvent::KILL, std::string(""));
+    NoGameState::getInstance().TransitionTo(p, GameEvent::UNKNOWN);
+    NoGameState::getInstance().TransitionTo(p, GameEvent::FINISH);
+    NoGameState::getInstance().TransitionTo(p, GameEvent::KILL);
     ASSERT_TRUE(GameState::match == NULL);
 
     ASSERT_TRUE(p->GetState() == &NoGameState::getInstance());
@@ -36,7 +36,7 @@ TEST_F(NoGameStateTest, TransitionToNotHandledEvent) {
 TEST_F(NoGameStateTest, TransitionToStartEvent) {
     ASSERT_TRUE(GameState::match == NULL);
 
-    NoGameState::getInstance().TransitionTo(p, GameEvent::START, std::string(""));
+    NoGameState::getInstance().TransitionTo(p, GameEvent::START);
 
     ASSERT_TRUE(GameState::match != NULL);
     ASSERT_TRUE(p->GetState() == &RunningGameState::getInstance());
@@ -57,15 +57,15 @@ RunningGameStateTest::~RunningGameStateTest() {
 }
 
 void RunningGameStateTest::SetUp() {
-    NoGameState::getInstance().TransitionTo(p, GameEvent::START, std::string(""));
+    NoGameState::getInstance().TransitionTo(p, GameEvent::START);
 }
 
 void RunningGameStateTest::TearDown() {}
 
 TEST_F(RunningGameStateTest, TransitionToNotHandledEvent) {
 
-    RunningGameState::getInstance().TransitionTo(p, GameEvent::UNKNOWN, std::string(""));
-    RunningGameState::getInstance().TransitionTo(p, GameEvent::START, std::string(""));
+    RunningGameState::getInstance().TransitionTo(p, GameEvent::UNKNOWN);
+    RunningGameState::getInstance().TransitionTo(p, GameEvent::START);
 
     ASSERT_EQ(GameState::match->total_kills, 0);
     ASSERT_TRUE(p->GetState() == &RunningGameState::getInstance());
@@ -75,7 +75,8 @@ TEST_F(RunningGameStateTest, TransitionToNotHandledEvent) {
 
 TEST_F(RunningGameStateTest, TransitionToKillEvent) {
     std::string line("  5:29 Kill: 5 2 6: Dono da Bola killed Oootsimo by MOD_ROCKET");
-    RunningGameState::getInstance().TransitionTo(p, GameEvent::KILL, line);
+    p->SetLine(line);
+    RunningGameState::getInstance().TransitionTo(p, GameEvent::KILL);
 
     ASSERT_EQ(GameState::match->total_kills, 1);
     ASSERT_TRUE(p->GetState() == &RunningGameState::getInstance());
@@ -84,7 +85,7 @@ TEST_F(RunningGameStateTest, TransitionToKillEvent) {
 }
 
 TEST_F(RunningGameStateTest, TransitionToFinishEvent) {
-    RunningGameState::getInstance().TransitionTo(p, GameEvent::FINISH, std::string(""));
+    RunningGameState::getInstance().TransitionTo(p, GameEvent::FINISH);
 
     ASSERT_TRUE(GameState::match == NULL);
     ASSERT_TRUE(p->GetState() == &NoGameState::getInstance());
