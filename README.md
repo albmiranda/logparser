@@ -61,75 +61,29 @@ This project aims to free all heap blocks. To achieve it the valgring was used. 
 
 ## Tests
 
-To provide more confidence the source code was submitted to unit test.
+To increase reliability the source code has been subjected to unit testing.
 A unit test application will be available after regular [compile](#getting-started) as well, to run it just type:.
 ```bash
    ctest --verbose
 ```
 
-Para maior confiabilidade e identificação precoce de eventuais falhas do código, foram elaborados testes unitários no core da aplicação, i.e., no pacote responsável por encontrar a posição da nave e, também, que decrifra a mensagem recebida.
+The code coverage was identified by gcov/lcov tools.
+> Overall coverage rate:
+  lines......: 90.4% (104 of 115 lines)
+  functions..: 96.0% (24 of 25 functions)
 
-Para execução dos testes e conseguinte análise de cobertura do código faça:
-```shell
-make test
+To reach this values just type:
+```bash
+   ./build/test/logparser_test
+   lcov --capture --directory ./build/src --output-file coverage.info
+   lcov -r coverage.info /usr/include/\* -o coverage_clean.info
+   genhtml coverage_clean.info --output-directory codecoverage
 ```
 
-Exemplo de saída:
-```
-andre@laptop:~/go/src/go-meli$ make test
+## Backlog - Future features
 
-Test and coverage
-go test -coverpkg=./... -coverprofile=profile.cov ./...
-?   	go-meli/cmd/main	[no test files]
-?   	go-meli/internal/db	[no test files]
-?   	go-meli/internal/handler	[no test files]
-?   	go-meli/internal/http	[no test files]
-ok  	go-meli/internal/satellite	0.015s	
+This project scope still covers some features which wasn't developed at this time. Following some of them:
+* Pipeline CI/CD
+* End-to-end tests
 
-coverage: 19.1% of statements in ./...
-?   	go-meli/pkg/dynamodb	[no test files]
-go tool cover -func profile.cov
-go-meli/cmd/main/main.go:12:				handlers				0.0%
-go-meli/cmd/main/main.go:38:				main					0.0%
-go-meli/internal/db/db.go:10:				GetAllSatellites			0.0%
-go-meli/internal/db/db.go:26:				UpdateSingleSatellite			0.0%
-go-meli/internal/db/db.go:38:				UpdateMultipleSatellites		0.0%
-go-meli/internal/handler/GetShipData.go:16:		GetShipData				0.0%
-go-meli/internal/handler/PostMultipleSatellites.go:17:	PostMultipleSatellites			0.0%
-go-meli/internal/handler/PostSingleSatellite.go:17:	PostSingleSatellite			0.0%
-go-meli/internal/http/http.go:19:			ClientError				0.0%
-go-meli/internal/satellite/findShip.go:9:		FindShip				0.0%
-go-meli/internal/satellite/location.go:19:		round					100.0%
-go-meli/internal/satellite/location.go:23:		toFixed					100.0%
-go-meli/internal/satellite/location.go:28:		calculateThreeCircleIntersection	75.8%
-go-meli/internal/satellite/location.go:108:		GetLocation				0.0%
-go-meli/internal/satellite/message.go:8:		deleteElementFromArray			100.0%
-go-meli/internal/satellite/message.go:16:		deleteEmptyWord				100.0%
-go-meli/internal/satellite/message.go:31:		deletePreviousWord			0.0%
-go-meli/internal/satellite/message.go:50:		deleteDuplicatedWord			0.0%
-go-meli/internal/satellite/message.go:63:		GetMessage				0.0%
-go-meli/pkg/dynamodb/dynamodb.go:19:			Scan					0.0%
-go-meli/pkg/dynamodb/dynamodb.go:29:			GetItemSatellite			0.0%
-go-meli/pkg/dynamodb/dynamodb.go:41:			NewItem					0.0%
-go-meli/pkg/dynamodb/dynamodb.go:56:			PutItem					0.0%
-total:							(statements)				19.1%
-```
-
-## Pipeline 
-
-O projeto também contempla pipeline de integração contínua. Para ter acesso basta qualquer commit em branches develop, main e feature/.
-
-## Backlog de evolução
-
-Apesar do projeto atender o objetivo proposto há diversas possibilidades de melhoria para serem feitas com o investimento de mais horas de desenvolvimento.
-
-Destas melhorias, particularmente, eu, atuaria em frentes para garantir melhor resultado na entrega, tais como:
-* Aumento da cobertura de testes unitários
-* Testes regressivos com mocks
-* Pipeline de CD
-
-
-
-# obrigado
-
-
+# Thank you!

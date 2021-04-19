@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 if(CMAKE_BUILD_TYPE MATCHES Debug)
     message("Debug mode!")
-    add_compile_options(-g -ggdb -O0)
+    add_compile_options(-g -ggdb -O0 -fprofile-arcs -ftest-coverage)
     set(CMAKE_VERBOSE_MAKEFILE ON)
 else()
     message("Release mode!")

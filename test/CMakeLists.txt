@@ -7,6 +7,6 @@ file(GLOB source
 
 add_executable (logparser_test ${source})
 
-target_link_libraries(logparser_test PUBLIC gtest gmock pthread modules fsm)
+target_link_libraries(logparser_test PUBLIC gcov gtest gmock pthread modules fsm)
 
 add_test(NAME logparser_test COMMAND logparser_test)

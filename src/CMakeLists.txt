@@ -5,6 +5,6 @@ add_subdirectory(modules)
 
 add_executable (logparser "main.cc")
 
-target_link_libraries(logparser PUBLIC modules fsm)
+target_link_libraries(logparser PUBLIC gcov modules fsm)
 
 install(TARGETS logparser DESTINATION ${PROJECT_SOURCE_DIR}/bin)

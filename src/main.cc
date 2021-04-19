@@ -6,9 +6,11 @@
 
 int main() {
 
+    std::cout << "Quake 3 Arena Log Parser - CloudWalk" << std::endl;
+
     std::ifstream logfile("../data/qgames.log", std::ifstream::in);
     if (logfile.is_open() == false) {
-        std::cout << "No file found" << std::endl;
+        std::cout << "No log file found" << std::endl;
         return -1;
     }
 
@@ -19,5 +21,7 @@ int main() {
     }
 
     logfile.close();
+
+    std::cout << "Done!" << std::endl;
     return 0;
 }
