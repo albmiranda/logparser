@@ -2,3 +2,10 @@
 bin/
 build/
 out/
+
+# Test
+Testing/
+
+# gcov
+codecoverage/
+coverage*.info

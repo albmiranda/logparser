@@ -14,8 +14,16 @@ const GameState * Parser::GetState() {
     return state;
 }
 
-void Parser::Handle(const std::string & line) {
-    state->TransitionTo(this, CheckEvent(line), line);
+void Parser::SetLine(std::string & l) {
+    line = l;
+}
+
+const std::string * Parser::GetLine() {
+    return &line;
+}
+
+void Parser::Handle() {
+    state->TransitionTo(this, CheckEvent(line));
 }
 
 int Parser::CheckEvent(const std::string & line) {

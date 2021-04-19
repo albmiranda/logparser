@@ -13,8 +13,7 @@ GameState & NoGameState::getInstance() {
     return singleton;
 }
 
-void NoGameState::TransitionTo(Parser * p, int event, const std::string & line) {
-    (void)line;
+void NoGameState::TransitionTo(Parser * p, int event) {
     if (event == GameEvent::START) {
         match = new MatchData(++match_index);
         p->SetState(RunningGameState::getInstance());
@@ -28,9 +27,9 @@ GameState & RunningGameState::getInstance() {
     return singleton;
 }
 
-void RunningGameState::TransitionTo(Parser *p, int event, const std::string & line) {
+void RunningGameState::TransitionTo(Parser *p, int event) {
     if (event == GameEvent::KILL) {
-        KillData kill = KillData(line);
+        KillData kill = KillData(*p->GetLine());
         match->Update(kill);
 
     } else if (event == GameEvent::FINISH) {

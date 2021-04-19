@@ -19,14 +19,14 @@ enum GameEvent : int {
 
 class GameState {
     public:
-        virtual void TransitionTo(Parser *, int, const std::string &) = 0;
+        virtual void TransitionTo(Parser *, int) = 0;
     protected:
         static MatchData * match;
 };
 
 class NoGameState : public GameState {
     public:
-        void TransitionTo(Parser *, int, const std::string &);
+        void TransitionTo(Parser *, int);
         static GameState& getInstance();
     private:
         NoGameState();
@@ -34,7 +34,7 @@ class NoGameState : public GameState {
 
 class RunningGameState : public GameState {
     public:
-        void TransitionTo(Parser *, int, const std::string &);
+        void TransitionTo(Parser *, int);
         static GameState& getInstance();
     public:
         RunningGameState();
