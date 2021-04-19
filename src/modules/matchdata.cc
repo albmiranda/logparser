@@ -42,7 +42,11 @@ int MatchData::Dump(const char * filename) {
 
     std::ofstream dumpfile(filename, std::ios_base::app);
 
-    dumpfile << "\"game_" << id << "\": {";
+    if (id != 1) {
+        dumpfile << "," << std::endl;
+    }
+
+    dumpfile << "{\"game\": \"game_" << id << "\",";
 
     dumpfile << "\"total_kills\": " << total_kills << ",";
 
@@ -64,7 +68,7 @@ int MatchData::Dump(const char * filename) {
     }
     dumpfile << " }";
 
-    dumpfile << "}" << std::endl;
+    dumpfile << "}";
 
     return 0;
 }
