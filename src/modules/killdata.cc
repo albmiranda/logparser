@@ -17,6 +17,9 @@ std::string KillData::GetDeathCause() {
     return death_cause;
 }
 
+/** From the line received this method finds the player between
+ * last ocurrency of ":" and first "killed" word.
+ */
 std::string KillData::FindPlayer(const std::string & line) {
     std::string str;
 
@@ -34,6 +37,9 @@ std::string KillData::FindPlayer(const std::string & line) {
     return str.substr(1, pos - 2);
 }
 
+/** From the line received this method finds the dath cause
+ * imediatelly afeter word "by".
+ */
 std::string KillData::FindDeathCause(const std::string & line) {
     std::size_t pos = line.find_last_of("by");
     if (pos == std::string::npos) {

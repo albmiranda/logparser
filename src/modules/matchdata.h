@@ -6,11 +6,19 @@
 
 #include "killdata.h"
 
+/** Represents a game match.
+ * It stores the number of kills happened during the match
+ * and those players responsible for the kills.
+ */
 class MatchData {
     public:
         MatchData(int index = 0);
         ~MatchData();
+
+        /* From a killing details updates player kills information */
         void Update(KillData &);
+
+        /* From a killing details updates player kills information */
         int Dump(const char *);
 
     private:
