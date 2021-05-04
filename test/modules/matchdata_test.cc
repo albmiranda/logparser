@@ -23,6 +23,7 @@ TEST_F(MatchDataTest, DefaultInitial) {
     EXPECT_EQ(match->total_kills, 0);
     EXPECT_EQ(match->players.empty(), true);
     EXPECT_EQ(match->kills.empty(), true);
+    EXPECT_EQ(match->deaths.empty(), true);
 }
 
 TEST_F(MatchDataTest, NotDefaultInitial) {
@@ -32,6 +33,7 @@ TEST_F(MatchDataTest, NotDefaultInitial) {
     EXPECT_EQ(notdefault_match.total_kills, 0);
     EXPECT_EQ(notdefault_match.players.empty(), true);
     EXPECT_EQ(notdefault_match.kills.empty(), true);
+    EXPECT_EQ(notdefault_match.deaths.empty(), true);
 }
 
 TEST_F(MatchDataTest, UpdateWorldPlayer) {
@@ -42,6 +44,8 @@ TEST_F(MatchDataTest, UpdateWorldPlayer) {
     EXPECT_EQ(match->total_kills, 1);
     EXPECT_EQ(match->players.empty(), true);
     EXPECT_EQ(match->kills.empty(), true);
+    EXPECT_EQ(match->deaths.size(), 1);
+    EXPECT_EQ(match->deaths["MOD_TRIGGER_HURT"], 1);
 }
 
 TEST_F(MatchDataTest, UpdateMultipleWorldPlayer) {
@@ -54,6 +58,8 @@ TEST_F(MatchDataTest, UpdateMultipleWorldPlayer) {
     EXPECT_EQ(match->total_kills, 3);
     EXPECT_EQ(match->players.empty(), true);
     EXPECT_EQ(match->kills.empty(), true);
+    EXPECT_EQ(match->deaths.size(), 1);
+    EXPECT_EQ(match->deaths["MOD_TRIGGER_HURT"], 3);
 }
 
 TEST_F(MatchDataTest, UpdateRegularPlayer) {
@@ -66,10 +72,12 @@ TEST_F(MatchDataTest, UpdateRegularPlayer) {
     EXPECT_EQ(match->players.size(), 1);
     EXPECT_EQ(match->kills.size(), 1);
     EXPECT_EQ(match->kills["Mal"], 2);
+    EXPECT_EQ(match->deaths.size(), 1);
+    EXPECT_EQ(match->deaths["MOD_ROCKET"], 2);
 }
 
 TEST_F(MatchDataTest, UpdateMultipleRegularPlayer) {
-    std::string PlayerMal_line           = "  5:28 Kill: 6 7 6: Mal killed Assasinu Credi by MOD_ROCKET";
+    std::string PlayerMal_line           = "  5:28 Kill: 6 7 6: Mal killed Assasinu Credi by MOD_LAVA";
     std::string PlayerOootsimo_line      = "  5:32 Kill: 2 5 6: Oootsimo killed Dono da Bola by MOD_ROCKET";
     std::string PlayerAssasinuCredi_line = "  5:38 Kill: 7 6 1: Assasinu Credi killed Mal by MOD_SHOTGUN";
     std::string PlayerZeh_line           = "  5:23 Kill: 4 7 7: Zeh killed Assasinu Credi by MOD_ROCKET_SPLASH";
@@ -93,6 +101,11 @@ TEST_F(MatchDataTest, UpdateMultipleRegularPlayer) {
     EXPECT_EQ(match->kills["Mal"], 2);
     EXPECT_EQ(match->kills["Oootsimo"], 1);
     EXPECT_EQ(match->kills["Assasinu Credi"], 4);
+    EXPECT_EQ(match->deaths.size(), 3); 
+    EXPECT_EQ(match->deaths["MOD_LAVA"], 2);
+    EXPECT_EQ(match->deaths["MOD_ROCKET"], 1);
+    EXPECT_EQ(match->deaths["MOD_SHOTGUN"], 4);
+    
 
     KillData PlayerZeh_kill(PlayerZeh_line);
     match->Update(PlayerZeh_kill);
@@ -105,10 +118,15 @@ TEST_F(MatchDataTest, UpdateMultipleRegularPlayer) {
     EXPECT_EQ(match->kills["Oootsimo"], 1);
     EXPECT_EQ(match->kills["Assasinu Credi"], 4);
     EXPECT_EQ(match->kills["Zeh"], 2);
+    EXPECT_EQ(match->deaths.size(), 4); 
+    EXPECT_EQ(match->deaths["MOD_LAVA"], 2);
+    EXPECT_EQ(match->deaths["MOD_ROCKET"], 1);
+    EXPECT_EQ(match->deaths["MOD_SHOTGUN"], 4);
+    EXPECT_EQ(match->deaths["MOD_ROCKET_SPLASH"], 2);
 }
 
 TEST_F(MatchDataTest, UpdateMixedPlayer) {
-    std::string PlayerMal_line      = "  5:28 Kill: 6 7 6: Mal killed Assasinu Credi by MOD_ROCKET";
+    std::string PlayerMal_line      = "  5:28 Kill: 6 7 6: Mal killed Assasinu Credi by MOD_LAVA";
     std::string PlayerOootsimo_line = "  5:32 Kill: 2 5 6: Oootsimo killed Dono da Bola by MOD_ROCKET";
     std::string world_line          = "  5:30 Kill: 1022 6 22: <world> killed Mal by MOD_TRIGGER_HURT";
 
@@ -126,6 +144,9 @@ TEST_F(MatchDataTest, UpdateMixedPlayer) {
     EXPECT_EQ(match->kills.size(), 2);
     EXPECT_EQ(match->kills["Mal"], 2);
     EXPECT_EQ(match->kills["Oootsimo"], 3);
+    EXPECT_EQ(match->deaths.size(), 2); 
+    EXPECT_EQ(match->deaths["MOD_LAVA"], 2);
+    EXPECT_EQ(match->deaths["MOD_ROCKET"], 3);
 
     KillData world_kill(world_line);
     match->Update(world_kill);
@@ -139,4 +160,8 @@ TEST_F(MatchDataTest, UpdateMixedPlayer) {
     EXPECT_EQ(match->kills.size(), 2);
     EXPECT_EQ(match->kills["Mal"], 2);
     EXPECT_EQ(match->kills["Oootsimo"], 3);
+    EXPECT_EQ(match->deaths.size(), 3); 
+    EXPECT_EQ(match->deaths["MOD_LAVA"], 2);
+    EXPECT_EQ(match->deaths["MOD_ROCKET"], 3);
+    EXPECT_EQ(match->deaths["MOD_TRIGGER_HURT"], 5);
 }

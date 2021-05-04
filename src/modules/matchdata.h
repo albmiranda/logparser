@@ -26,6 +26,7 @@ class MatchData {
         int total_kills;
         std::vector<std::string> players;
         std::map<std::string, int> kills;
+        std::map<std::string, int> deaths;
 };
 
 #endif //MODULES_MATCHDATA

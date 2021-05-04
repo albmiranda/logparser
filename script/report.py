@@ -1,7 +1,7 @@
 import json
 import os
 
-def convert_gamematch_result_into_json(original_file_path, json_file_path):
+def convert_record_into_json(original_file_path, json_file_path):
     """ By default the record file with game match information isn't json format.
     A convertion to json file makes easier to manipulate the file data.
 
@@ -15,7 +15,7 @@ def convert_gamematch_result_into_json(original_file_path, json_file_path):
         f_json.write("]")
 
 
-def show_gamematch_information(obj):
+def show_record_report(obj):
     """ Prints information about all game match individually
 
     Args:
@@ -62,16 +62,25 @@ if __name__ == "__main__":
     absolute_file_path = os.path.join(dirname, "../out/match.rec")
     absolute_json_path = os.path.join(dirname, "../out/match.json")
 
-    convert_gamematch_result_into_json(absolute_file_path, absolute_json_path)
+    convert_record_into_json(absolute_file_path, absolute_json_path)
 
-    json_file = open(absolute_json_path, "r+")
-    obj = json.load(json_file)
+    with open(absolute_json_path,"r+") as json_file:
+        obj = json.load(json_file)
 
-    print("###### GAME MATCHES ######")
-    show_gamematch_information(obj)
+        print("###### GAME MATCHES REPORT ######\n")
+        show_record_report(obj)
 
-    print("###### RANKING - NUMBER OF KILLS ######")
-    ranking = create_ranking_of_killers(obj)
-    pretty_print_ranking(ranking)
+        print("###### RANKING - NUMBER OF KILLS ######\n")
+        ranking_players = create_ranking_of_killers(obj)
+        pretty_print_ranking(ranking_players)
 
-    json_file.close()
+
+
+    print("###### DEATH CAUSE REPORT ######")
+    absolute_deaths_file_path = os.path.join(dirname, "../out/match.rec_deathcause")
+    absolute_deaths_json_path = os.path.join(dirname, "../out/match_deathcause.json")
+    convert_record_into_json(absolute_deaths_file_path, absolute_deaths_json_path)
+
+    with open(absolute_deaths_json_path,"r+") as json_file:
+        obj = json.load(json_file)
+        show_record_report(obj)
