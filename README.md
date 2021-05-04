@@ -94,7 +94,6 @@ To reach this values just type:
 
 This project scope still covers some features which wasn't developed at this time. Following some of them:
 * *Plus* task
-* Pipeline CI/CD
 * End-to-end tests
 
 # Thank you!
