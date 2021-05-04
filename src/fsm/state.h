@@ -10,6 +10,8 @@
 
 class Parser;
 
+/** FSM event available
+ */
 enum GameEvent : int {
     UNKNOWN = -1,
     START = 0,
@@ -17,6 +19,10 @@ enum GameEvent : int {
     KILL
 };
 
+/** Interface wich represents a state of FSM.
+ * Every state reads a event and take decision if transition itself
+ * to another state or not.
+ */
 class GameState {
     public:
         virtual void TransitionTo(Parser *, int) = 0;
@@ -24,6 +30,9 @@ class GameState {
         static MatchData * match;
 };
 
+/** Represents a no running game.
+ * In this state only START event will trigger some action.
+ */
 class NoGameState : public GameState {
     public:
         void TransitionTo(Parser *, int);
@@ -32,6 +41,9 @@ class NoGameState : public GameState {
         NoGameState();
 };
 
+/** Represents a running game.
+ * In this state KILL and FINISH event will trigger some action.
+ */
 class RunningGameState : public GameState {
     public:
         void TransitionTo(Parser *, int);

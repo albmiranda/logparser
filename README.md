@@ -72,16 +72,17 @@ This project aims to free all heap blocks. To achieve it the valgring was used. 
 To increase reliability the source code has been subjected to unit testing.
 A unit test application will be available after regular [compile](#getting-started) as well, to run it just type:.
 ```bash
+   cd build
    ctest --verbose
 ```
 
 The code coverage was identified by gcov/lcov tools.
 > Summary coverage rate:
-  lines......: 90.8% (109 of 120 lines)
-  functions..: 96.3% (26 of 27 functions)
+  lines......: 97.4% (152 of 156 lines)
+  functions..: 100.0% (28 of 28 functions)
   branches...: no data found
 
-To reach this values just type:
+To reach this values just build the application in debug mode and then type:
 ```bash
     cd build
    ./test/logparser_test
@@ -93,8 +94,7 @@ To reach this values just type:
 ## Backlog - Future features
 
 This project scope still covers some features which wasn't developed at this time. Following some of them:
-* *Plus* task
-* Pipeline CI/CD
 * End-to-end tests
+* CD pipeline
 
 # Thank you!
